@@ -16,8 +16,8 @@ function App() {
   //   setLastName(e.target.value);
   // }
 
-  const [formData, setFormData] = useState({ firstName: "", lastName: "" });
-
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "" });
+  console.log(formData.email);
   function changeHandler(event) {
     setFormData(prevFormData => {
       return {
@@ -34,14 +34,24 @@ function App() {
           type='text'
           placeholder='first name'
           onChange={changeHandler}
-          name='firstName' />
+          name='firstName'
+          value={formData.firstName} />
 
         <br></br>
         <input
           type='text'
           placeholder='last name'
           onChange={changeHandler}
-          name='lastName' />
+          name='lastName'
+          value={formData.lastName} />
+
+        <input
+          type='email'
+          placeholder="Email"
+          onChange={changeHandler}
+          name='email'
+          value={formData.email} />
+          
       </form>
     </div>
   );
