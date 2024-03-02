@@ -16,7 +16,7 @@ function App() {
   //   setLastName(e.target.value);
   // }
 
-  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", comments: "", isVisible: true, mode: "" });
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", comments: "", isVisible: true, mode: "", favCar: "" });
   console.log(formData);
   function changeHandler(event) {
     const { name, value, checked, type } = event.target;
@@ -28,9 +28,16 @@ function App() {
     });
   }
 
+  function submitHandler(e) { 
+    e.preventDefault();
+    console.log("Printing form data");
+    console.log(formData)
+  }
+  
+
   return (
     <div className="App">
-      <form>
+      <form onSubmit={submitHandler}>
         <input
           type='text'
           placeholder='first name'
@@ -74,25 +81,46 @@ function App() {
         />
         <label htmlFor='isVisible'>Are you visible ?</label>
         <br></br>
-        <input
-          type='radio'
-          onChange={changeHandler}
-          name='mode'
-          value="online"
-          id="online"
-          checked = {formData.mode === "online"}
-        />
-        <label>Online mode</label>
-        <input
-          type='radio'
-          onChange={changeHandler}
-          name='mode'
-          value="offline"
-          id="offline"
-          checked = {formData.mode === "offline"}
 
-        />
-        <label>Offline mode</label>
+        <fieldset>
+          <legend>Mode:</legend>
+
+          <input
+            type='radio'
+            onChange={changeHandler}
+            name='mode'
+            value="online"
+            id="online"
+            checked={formData.mode === "online"}
+          />
+          <label>Online mode</label>
+          <input
+            type='radio'
+            onChange={changeHandler}
+            name='mode'
+            value="offline"
+            id="offline"
+            checked={formData.mode === "offline"}
+
+          />
+          <label>Offline mode</label>
+        </fieldset>
+
+        <select
+          name="favCar"
+          id='favCar'
+          value={formData.favCar}
+          onChange={changeHandler}
+        >
+          <option value='scarpio'>Scarpio</option>
+          <option value='scarpio'>Fortuner</option>
+          <option value='scarpio'>Benz</option>
+          <option value='scarpio'>Audi</option>
+
+        </select>
+        <label htmlFor='favCar'>Tell me your favourite car</label>
+        {/* <input type="submit" name="" value="submit" id="" /> */}
+        <button>Submit</button>
       </form>
     </div >
   );
