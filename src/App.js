@@ -16,13 +16,14 @@ function App() {
   //   setLastName(e.target.value);
   // }
 
-  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", comments: "" });
-  console.log(formData.comments);
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", comments: "", isVisible: true, mode: "" });
+  console.log(formData);
   function changeHandler(event) {
+    const { name, value, checked, type } = event.target;
     setFormData(prevFormData => {
       return {
         ...prevFormData,
-        [event.target.name]: event.target.value
+        [name]: type === "checkbox" ? checked : value
       }
     });
   }
@@ -62,8 +63,38 @@ function App() {
           value={formData.comments}
         />
 
+        <br></br>
+
+        <input
+          type='checkbox'
+          onChange={changeHandler}
+          // name='isVisible'
+          checked={formData.isVisible}
+        //here i am using thevalue of checked instead
+        />
+        <label htmlFor='isVisible'>Are you visible ?</label>
+        <br></br>
+        <input
+          type='radio'
+          onChange={changeHandler}
+          name='mode'
+          value="online"
+          id="online"
+          checked = {formData.mode === "online"}
+        />
+        <label>Online mode</label>
+        <input
+          type='radio'
+          onChange={changeHandler}
+          name='mode'
+          value="offline"
+          id="offline"
+          checked = {formData.mode === "offline"}
+
+        />
+        <label>Offline mode</label>
       </form>
-    </div>
+    </div >
   );
 }
 
